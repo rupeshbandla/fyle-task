@@ -1,0 +1,19 @@
+.material-icons-logout{
+    float:right;
+    font-size:30px;
+    cursor: pointer;
+    margin-right: 20px;
+   padding: 30px
+  }
+  .activeslogo{
+    height:80px;
+    width:auto;
+    float:left;
+    cursor: pointer;
+  }
+  .material-icons-home{
+    float:right;
+    font-size:30px;
+    cursor: pointer;
+    padding: 30px
+  }

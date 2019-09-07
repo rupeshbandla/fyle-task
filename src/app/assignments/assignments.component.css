@@ -1,0 +1,11 @@
+table ,div{
+    width: 100%;
+  }
+  .filter {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }

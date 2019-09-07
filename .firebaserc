@@ -1,0 +1,18 @@
+{
+  "projects": {
+    "default": "activeszaps",
+    "activesschools": "the-actives"
+  },
+  "targets": {
+    "the-actives": {
+      "hosting": {
+        "app": [
+          "activesschools.firebaseapp.com"
+        ],
+        "activesschools": [
+          "activesschools"
+        ]
+      }
+    }
+  }
+}
