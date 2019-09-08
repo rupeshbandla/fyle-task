@@ -4,12 +4,12 @@
     <mat-form-field>
       <mat-label>City</mat-label>
       <mat-select [(ngModel)]="city">
-        <mat-option *ngFor="let city of cities" [value]="city.value">
+        <mat-option *ngFor="let city of cities" [value]="city.value" (click)="settingBankData(city.value)">
           {{city.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" class="BankName" (click)="settingBankData(city)">Submit</button>
+    <!-- <button mat-raised-button color="primary" class="BankName" (click)="settingBankData(city)">Submit</button> -->
   </mat-card>
 </div>
 <span class="progress" *ngIf="progressloder" style="padding-bottom:0px" color="Accent">
@@ -17,9 +17,9 @@
 </span>
 
 <mat-card>
-  <h1>List of Banks in {{city}}</h1>
+  <h2>List of Banks in {{city}}</h2>
   <mat-form-field class="filter">
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
   </mat-form-field>
   <table mat-table [dataSource]="groupdataSource" class="mat-elevation-z8" matSort>
 

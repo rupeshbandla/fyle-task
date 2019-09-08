@@ -49,7 +49,7 @@ const appRoutes: Routes = [
     AssignmentsComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserModule,
     NgxDaterangepickerMd,

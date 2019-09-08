@@ -4,14 +4,14 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: "AIzaSyA2KRzWZJXHfkFL_lOQh3Npi7pj63UHu5I",
-    authDomain: "the-actives.firebaseapp.com",
-    databaseURL: "https://the-actives.firebaseio.com",
-    projectId: "the-actives",
-    storageBucket: "the-actives.appspot.com",
-    messagingSenderId: "504036294441"
-  }
+  // firebase: {
+  //   apiKey: "AIzaSyA2KRzWZJXHfkFL_lOQh3Npi7pj63UHu5I",
+  //   authDomain: "the-actives.firebaseapp.com",
+  //   databaseURL: "https://the-actives.firebaseio.com",
+  //   projectId: "the-actives",
+  //   storageBucket: "the-actives.appspot.com",
+  //   messagingSenderId: "504036294441"
+  // }
   // firebase:{  
   //   apiKey: "AIzaSyCUG3_LINoIxiy3V91dZZXy1xXOUAgkpYY",
   //   authDomain: "activeszaps.firebaseapp.com",
