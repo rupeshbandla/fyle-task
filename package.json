@@ -8,13 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --output-path angularproject --aot --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/compiler-cli": "^6.1.10",
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/compiler": "^6.1.10",
     "@angular/cli": "^6.2.9",
     "@angular/animations": "^6.1.10",
     "@angular/cdk": "^7.2.1",
@@ -42,6 +40,7 @@
     "typescript": "~2.9.2"
   },
   "devDependencies": {
+    "@angular/cli": "^6.2.9",
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular/compiler-cli": "^6.1.10",
     "@angular/language-service": "^6.1.0",
