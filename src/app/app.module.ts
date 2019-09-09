@@ -35,18 +35,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AssignmentsComponent } from './assignments/assignments.component'
+import { AssignmentsComponent } from './assignments/assignments.component';
+import { BankdetailsComponent } from './bankdetails/bankdetails.component';
 
 const appRoutes: Routes = [
-
   { path: '', component: AssignmentsComponent },
-  { path: 'banks/{bankid}', component: AssignmentsComponent }
-
+  { path: 'banks/{bankid}', component: BankdetailsComponent }
 ];
 @NgModule({
   declarations: [
     AppComponent,
     AssignmentsComponent,
+    BankdetailsComponent
   ],
   imports: [
     // AngularFireModule.initializeApp(environment.firebase),
