@@ -8,11 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {
-    "@angular/language-service": "^6.1.0",
     "@angular/animations": "^6.1.10",
     "@angular/cdk": "^7.2.1",
     "@angular/common": "^6.1.0",
