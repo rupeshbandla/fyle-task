@@ -40,7 +40,7 @@ import { BankdetailsComponent } from './bankdetails/bankdetails.component';
 
 const appRoutes: Routes = [
   { path: '', component: AssignmentsComponent },
-  { path: 'banks/{bankid}', component: BankdetailsComponent }
+  { path: 'banks/:bankid', component: BankdetailsComponent }
 ];
 @NgModule({
   declarations: [

@@ -1,12 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { SelectionModel } from '@angular/cdk/collections';
+declare var $: any;
+declare var jQuery: any;
 export interface PeriodicElement1 {
   'bank_name': string;
   'ifsc': string;
   'bank_id': string;
-  'branch': string
+  'branch': string;
 }
 export interface Bank {
   value: string;
@@ -14,62 +17,80 @@ export interface Bank {
 }
 
 const ELEMENT_DATA1: PeriodicElement1[] = [];
+
 @Component({
   selector: 'app-assignments',
   templateUrl: './assignments.component.html',
   styleUrls: ['./assignments.component.css']
 })
 export class AssignmentsComponent implements OnInit {
-  displayedYearColumns: string[] = ['bank_name', 'ifsc', 'bank_id', 'branch'];
-  groupdataSource = new MatTableDataSource(ELEMENT_DATA1);
+  displayedYearColumns: string[] = ['action', 'bank_name', 'ifsc', 'bank_id', 'branch'];
+  groupdataSource = new MatTableDataSource<PeriodicElement1>(ELEMENT_DATA1);
+
+  selection = new SelectionModel<PeriodicElement1>(true, []);
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('button') button: ElementRef;
   MaterialTableComponent: any;
-  city;
-  yearGroupData = [];
-  progressloder = false;
+  city = 'CUTTACK';
+  bankGroupData = [];
+  previousSelected = [];
+  public progressloder: boolean = false;
   ELEMENT_DATA1: any;
+  tabledata = []
   cities: Bank[] = [
     { value: 'BANGALORE', viewValue: 'BANGALORE' },
     { value: 'KOLKATA', viewValue: 'KOLKATA' },
     { value: 'CUTTACK', viewValue: 'CUTTACK' },
     { value: 'DELHI', viewValue: 'DELHI' },
+    { value: 'MUMBAI', viewValue: 'MUMBAI' },
   ];
   bankid: any;
+
   applyFilter(filterValue: string) {
     this.groupdataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
-    this.bankid = this.route.snapshot.params.bank_id;
+  constructor(private http: HttpClient, private router: Router) {
+    this.settingBankData(this.city)
   }
 
   ngOnInit() {
   }
   settingBankData(city) {
-
+    console.log('city', city)
+    setTimeout(() => {
+      this.progressloder=true
     this.http.get('https://vast-shore-74260.herokuapp.com/banks?city=' + city).subscribe(data => {
       console.log('data', data)
-      this.yearGroupData.push(data)
-      console.log("schools within fn", this.yearGroupData)
-      for (var i = 0; i < this.yearGroupData.length; i++) {
-        this.ELEMENT_DATA1 = this.yearGroupData[i]
+      this.bankGroupData.push(data)
+      for (var i = 0; i < this.bankGroupData.length; i++) {
+        this.ELEMENT_DATA1 = this.bankGroupData[i]
       }
       this.progressloder = false
-
       this.groupdataSource = new MatTableDataSource<PeriodicElement1>(this.ELEMENT_DATA1);
-      console.log(this.groupdataSource)
       this.groupdataSource.paginator = this.paginator;
       this.groupdataSource.sort = this.sort;
     },
 
-      err => {
+      () => {
         this.progressloder = false
         alert('something went wrong')
         // console.log("error", err)
       })
+    }, 1000)
   }
-  clickBankData1() {
 
+  redirectToDetails = (bankid, bank_name, ifsc, branch) => {
+    this.router.navigate(['banks/', bankid])
+    this.tabledata.push(bankid, bank_name, ifsc, branch)
+    localStorage.setItem('bank', JSON.stringify(this.tabledata))
+  }
+
+  toggleSelected(obj) {
+    console.log(obj);
+    this.previousSelected.push(obj)
+    console.log(this.previousSelected);
+    localStorage.setItem('favorites', JSON.stringify(this.previousSelected))
   }
 }

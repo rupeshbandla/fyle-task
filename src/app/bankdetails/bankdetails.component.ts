@@ -6,8 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bankdetails.component.css']
 })
 export class BankdetailsComponent implements OnInit {
+  data: any;
 
-  constructor() { }
+  constructor() {
+    this.data=JSON.parse(localStorage.getItem('bank'))
+
+    for (var i = 0; i < this.data.length; i++) {
+      console.table(this.data[i])
+    }
+  }
 
   ngOnInit() {
   }

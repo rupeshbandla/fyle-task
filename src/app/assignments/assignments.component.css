@@ -3,9 +3,15 @@ table ,div{
   }
   .filter {
     font-size: 14px;
-    width: 100%;
+  }
+  .card{
+    background-color: aqua
   }
   
   td, th {
     width: 25%;
   }
+  mat-form-field{
+    margin-left:30px
+  }
+  
