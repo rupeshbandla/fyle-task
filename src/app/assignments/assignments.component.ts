@@ -105,25 +105,23 @@ export class AssignmentsComponent implements OnInit {
     localStorage.setItem('bank', JSON.stringify(this.tabledata))
   }
 
-  toggleSelected(obj) {
+  toggleSelected(obj: any) {
     this.previousSelected = []
     let saveData = localStorage.getItem('favorites')
-    this.previousSelected = JSON.parse(saveData)
     // console.log(obj);
-    if (!!this.previousSelected) {
+    if (!!saveData) {
+      this.previousSelected = JSON.parse(saveData)
       let s = this.previousSelected.findIndex(item => (item.ifsc === obj.ifsc))
-      // alert(s)
       if (s >= 0) {
         this.previousSelected.splice(s, 1)
       } else {
         this.previousSelected.push(obj)
       }
-
+      localStorage.setItem('favorites', JSON.stringify(this.previousSelected))
     } else {
       this.previousSelected.push(obj)
+      localStorage.setItem('favorites', JSON.stringify(this.previousSelected))
+
     }
-
-
-    localStorage.setItem('favorites', JSON.stringify(this.previousSelected))
   }
 }
