@@ -20,7 +20,7 @@
   <table mat-table [dataSource]="groupdataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell *matCellDef="let ELEMENT_DATA1" style="cursor: pointer;" (click)="toggleSelected(ELEMENT_DATA1)" >
+      <td mat-cell *matCellDef="let ELEMENT_DATA1" style="cursor: pointer;" (click)="toggleSelected(ELEMENT_DATA1)">
         <button mat-icon-button color="accent">
           <mat-icon (click)="ELEMENT_DATA1.disabled = !ELEMENT_DATA1.disabled">
             {{getstorage(ELEMENT_DATA1) ? 'favorite' : 'favorite_border'}}</mat-icon>

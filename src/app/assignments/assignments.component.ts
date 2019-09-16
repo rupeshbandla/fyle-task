@@ -59,15 +59,16 @@ export class AssignmentsComponent implements OnInit {
     this.settingBankData(this.city)
   }
 
-  getstorage(data:any){
+  getstorage(data: any) {
     let saveData = localStorage.getItem('favorites')
     this.saveData = JSON.parse(saveData)
-    let s = this.saveData.findIndex(item => (item.ifsc === data.ifsc))
-    if (s >= 0) {
-      return true
-      this.nameAlreadyExist = true;
+    if (!!this.saveData) {
+      let s = this.saveData.findIndex(item => (item.ifsc === data.ifsc))
+      if (s >= 0) {
+        return true
+      }
     }
-    // alert(JSON.stringify(this.saveData))
+
     return false
   }
 
@@ -109,20 +110,20 @@ export class AssignmentsComponent implements OnInit {
     let saveData = localStorage.getItem('favorites')
     this.previousSelected = JSON.parse(saveData)
     // console.log(obj);
-    let s = this.previousSelected.findIndex(item => (item.ifsc === obj.ifsc))
-    // alert(s)
-    if (s >= 0) {
-      this.previousSelected.splice(s,1)
-    }else{
+    if (!!this.previousSelected) {
+      let s = this.previousSelected.findIndex(item => (item.ifsc === obj.ifsc))
+      // alert(s)
+      if (s >= 0) {
+        this.previousSelected.splice(s, 1)
+      } else {
+        this.previousSelected.push(obj)
+      }
+
+    } else {
       this.previousSelected.push(obj)
     }
-    
-    
-    var uniqueVals = [];
-    $.each(this.previousSelected, (i, el) => {
-      if ($.inArray(el, uniqueVals) === -1) uniqueVals.push(el);
-    });
-    console.log(uniqueVals);
-    localStorage.setItem('favorites', JSON.stringify(uniqueVals))
+
+
+    localStorage.setItem('favorites', JSON.stringify(this.previousSelected))
   }
 }
