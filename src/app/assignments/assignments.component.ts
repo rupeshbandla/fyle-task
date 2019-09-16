@@ -46,38 +46,55 @@ export class AssignmentsComponent implements OnInit {
     { value: 'MUMBAI', viewValue: 'MUMBAI' },
   ];
   bankid: any;
+  item: any;
+  saveData = [];
+  nameAlreadyExist: boolean;
 
   applyFilter(filterValue: string) {
     this.groupdataSource.filter = filterValue.trim().toLowerCase();
   }
 
   constructor(private http: HttpClient, private router: Router) {
+
     this.settingBankData(this.city)
   }
 
+  getstorage(data:any){
+    let saveData = localStorage.getItem('favorites')
+    this.saveData = JSON.parse(saveData)
+    let s = this.saveData.findIndex(item => (item.ifsc === data.ifsc))
+    if (s >= 0) {
+      return true
+      this.nameAlreadyExist = true;
+    }
+    // alert(JSON.stringify(this.saveData))
+    return false
+  }
+
   ngOnInit() {
+    // this.getstorage(null)
   }
   settingBankData(city) {
     console.log('city', city)
     setTimeout(() => {
-      this.progressloder=true
-    this.http.get('https://vast-shore-74260.herokuapp.com/banks?city=' + city).subscribe(data => {
-      console.log('data', data)
-      this.bankGroupData.push(data)
-      for (var i = 0; i < this.bankGroupData.length; i++) {
-        this.ELEMENT_DATA1 = this.bankGroupData[i]
-      }
-      this.progressloder = false
-      this.groupdataSource = new MatTableDataSource<PeriodicElement1>(this.ELEMENT_DATA1);
-      this.groupdataSource.paginator = this.paginator;
-      this.groupdataSource.sort = this.sort;
-    },
-
-      () => {
+      this.progressloder = true
+      this.http.get('https://vast-shore-74260.herokuapp.com/banks?city=' + city).subscribe(data => {
+        // console.log('data', data)
+        this.bankGroupData.push(data)
+        for (var i = 0; i < this.bankGroupData.length; i++) {
+          this.ELEMENT_DATA1 = this.bankGroupData[i]
+        }
         this.progressloder = false
-        alert('something went wrong')
-        // console.log("error", err)
-      })
+        this.groupdataSource = new MatTableDataSource<PeriodicElement1>(this.ELEMENT_DATA1);
+        this.groupdataSource.paginator = this.paginator;
+        this.groupdataSource.sort = this.sort;
+      },
+
+        () => {
+          this.progressloder = false
+          alert('something went wrong')
+          // console.log("error", err)
+        })
     }, 1000)
   }
 
@@ -88,9 +105,24 @@ export class AssignmentsComponent implements OnInit {
   }
 
   toggleSelected(obj) {
-    console.log(obj);
-    this.previousSelected.push(obj)
-    console.log(this.previousSelected);
-    localStorage.setItem('favorites', JSON.stringify(this.previousSelected))
+    this.previousSelected = []
+    let saveData = localStorage.getItem('favorites')
+    this.previousSelected = JSON.parse(saveData)
+    // console.log(obj);
+    let s = this.previousSelected.findIndex(item => (item.ifsc === obj.ifsc))
+    // alert(s)
+    if (s >= 0) {
+      this.previousSelected.splice(s,1)
+    }else{
+      this.previousSelected.push(obj)
+    }
+    
+    
+    var uniqueVals = [];
+    $.each(this.previousSelected, (i, el) => {
+      if ($.inArray(el, uniqueVals) === -1) uniqueVals.push(el);
+    });
+    console.log(uniqueVals);
+    localStorage.setItem('favorites', JSON.stringify(uniqueVals))
   }
 }

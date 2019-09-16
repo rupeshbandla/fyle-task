@@ -16,16 +16,14 @@
   <br>
 
   <mat-progress-bar mode="indeterminate" color="warn" *ngIf="progressloder"></mat-progress-bar>
-  <!-- <span class="progress" *ngIf="progressloder" mode="indeterminate" color="warn">
-    <div class="indeterminate"></div>
-  </span> -->
 
   <table mat-table [dataSource]="groupdataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
-      <td mat-cell *matCellDef="let ELEMENT_DATA1" style="cursor: pointer;">
-        <button mat-icon-button color="accent" (click)="toggleSelected(ELEMENT_DATA1)">
-          <mat-icon (click)="ELEMENT_DATA1.disabled = !ELEMENT_DATA1.disabled">{{ELEMENT_DATA1.disabled ? 'favorite' : 'favorite_border'}}</mat-icon>
+      <td mat-cell *matCellDef="let ELEMENT_DATA1" style="cursor: pointer;" (click)="toggleSelected(ELEMENT_DATA1)" >
+        <button mat-icon-button color="accent">
+          <mat-icon (click)="ELEMENT_DATA1.disabled = !ELEMENT_DATA1.disabled">
+            {{getstorage(ELEMENT_DATA1) ? 'favorite' : 'favorite_border'}}</mat-icon>
         </button>
       </td>
     </ng-container>
